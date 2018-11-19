@@ -1,0 +1,132 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+
+    function randomize(){
+      $("#p").html("");
+      var lognum = 0;
+      do {
+        lognum += 1;
+
+      var pool1 = ["Sara", "Orrin", "Alex", "Ben", "Allison", "Keith", "Demy"];
+      var pool2 = ["Greg", "Alex", "Ben", "Allison", "Keith", "Demy"];
+      var pool3 = ["Greg", "Sara", "Orrin", "Allison", "Keith", "Demy"];
+      var pool4 = ["Greg", "Sara", "Ben", "Orrin", "Alex", "Keith", "Demy"];
+      var pool5 = ["Greg", "Sara", "Ben", "Orrin", "Alex", "Allison"];
+      var chosen = [];
+
+      index = Math.floor((Math.random() * pool1.length-1) + 1);
+      chosen.push(pool1[index]);
+      console.log("Greg chooses: " + chosen[0]);
+      pool1.splice(index,1);
+
+      for (i=0; i<chosen.length; i++){
+        var index = pool2.indexOf(chosen[i]);
+        pool2.splice(index,1);
+      }
+      console.log("Remaining pool: " + pool2);
+
+      index = Math.floor((Math.random() * pool2.length-1) + 1);
+      chosen.push(pool2[index]);
+      console.log("Sara chooses: " + chosen[1]);
+      pool2.splice(index,1);
+      index = Math.floor((Math.random() * pool2.length-1) + 1);
+      chosen.push(pool2[index]);
+      console.log("Orrin chooses: " + chosen[2]);
+
+      for (i=0; i<chosen.length; i++){
+        var index = pool3.indexOf(chosen[i]);
+        pool3.splice(index,1);
+      }
+      console.log("Remaining pool: " + pool3);
+
+
+      index = Math.floor((Math.random() * pool3.length-1) + 1);
+      chosen.push(pool3[index]);
+      console.log("Alex chooses: " + chosen[3]);
+      pool3.splice(index,1);
+      index = Math.floor((Math.random() * pool3.length-1) + 1);
+      chosen.push(pool3[index]);
+      console.log("Ben chooses: " + chosen[4]);
+
+      for (i=0; i<chosen.length; i++){
+        var index = pool4.indexOf(chosen[i]);
+        pool4.splice(index,1);
+      }
+      console.log("Remaining pool: " + pool4);
+
+      index = Math.floor((Math.random() * pool4.length-1) + 1);
+      chosen.push(pool4[index]);
+      console.log("Allison chooses: " + chosen[5]);
+
+      console.log("CHOSEN SO FAR: " + chosen);
+      for (i=0; i<chosen.length; i++){
+        var index = pool5.indexOf(chosen[i]);
+        // console.log("Removing " + chosen[i]);
+        if (index != -1){pool5.splice(index,1);} else {console.log("NEGATIVE 1!!!"); }
+        // console.log("Remaining pool: " + pool5);
+      }
+      console.log("Remaining pool: " + pool5);
+
+
+      index = Math.floor((Math.random() * pool5.length-1) + 1);
+      chosen.push(pool5[index]);
+      console.log("Keith chooses: " + chosen[6]);
+      pool5.splice(index,1);
+      index = Math.floor((Math.random() * pool5.length-1) + 1);
+      chosen.push(pool5[index]);
+      // if (chosen.indexOf(undefined) != -1) {randomize();}
+      console.log("Demy chooses: " + chosen[7]);
+
+    } while (chosen.indexOf(undefined) != -1);
+      console.log(chosen);
+      console.log(lognum);
+      valid(chosen);
+
+      $("#p").append("<h1>Greg Wolf will buy for " + chosen[0] + "</h1>");
+      $("#p").append("<h1>Amber will buy for " + chosen[1] + "</h1>");
+      $("#p").append("<h1>Sara will buy for " + chosen[2] + "</h1>");
+      $("#p").append("<h1>Orrin will buy for " + chosen[3] + "</h1>");
+      $("#p").append("<h1>Alex will buy for " + chosen[4] + "</h1>");
+      $("#p").append("<h1>Allison will buy for " + chosen[5] + "</h1>");
+      $("#p").append("<h1>Keith will buy for " + chosen[6] + "</h1>");
+      $("#p").append("<h1>Demy will buy for " + chosen[7] + "</h1>");
+    }
+
+
+    function valid(list){
+      var giver = ["Greg", "Sara", "Orrin", "Alex", "Allison", "Keith", "Demy"];
+      if (list[0] == "Amber"
+      || list[1] == "Greg"
+      || list[2] == "Orrin"
+      || list[3] == "Sara"
+      || list[6] == "Demy"
+      || list[7] == "Keith"
+        ) {
+          console.log("INVALID LIST!");
+          // randomize();
+        }
+      for (i=0; i<list.length; i++){
+        if (giver[i] == list[i]) {
+          console.log("INVALID LIST!");
+          // randomize();
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div>
+      <div id="box">
+      <p id="p">
+      </p>
+    </div>
+      <button onclick="randomize()" type="button" class="btn btn-lg btn-block">
+        Randomize
+      </button>
+    </div>
+  </body>
+</html>
